@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:flutter_text_box/flutter_text_box.dart";
 
 void main() {
   runApp(const MyApp());
@@ -11,31 +12,24 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Logon app',
+      title: 'Aplicaciones ',
       theme: ThemeData(),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const Login (title: 'Desarrollo Movil'),
     );
   }
 }
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+ 
+class Login extends StatefulWidget {
+  const Login({super.key, required this.title});
 
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<Login> createState() => _LoginState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
+class _LoginState extends State<Login> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,21 +41,38 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
+              Text(
+              'Bienvenidos al sistema :',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
-          ],
+         TextBoxIcon(
+                icon: Icons.email_outlined, 
+                inputType: TextInputType.emailAddress,
+                label: 'Email',
+                hint: 'Please enter your email address here',
+                errorText: 'This field is requiered !',
+                onSaved: (String value) { }, 
+              ),
+              SizedBox(height: 16),
+              TextBoxIcon(
+                icon: Icons.lock_outlined, 
+                inputType: TextInputType.number,
+                obscure: true,
+                label: 'Password', 
+                hint: 'Please enter your password here', 
+                errorText: 'This field is requiered !', 
+                onSaved: (String value){ }
+                ),
+              const SizedBox(height:16),
+              ElevatedButton(
+                  // style: style,
+                  onPressed: () {},
+                  child: const Text('Ingresar'),
+                  ),
+
+                ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
